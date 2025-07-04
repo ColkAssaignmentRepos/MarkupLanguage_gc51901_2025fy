@@ -42,11 +42,12 @@ COPY apache/httpd.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=builder /app/www /var/www/html
 
-COPY --from=builder /app/src/cgi /var/www/html/cgi
-RUN chmod +x /var/www/html/cgi/*.rb
+COPY --from=builder /app/src/cgi /usr/lib/cgi-bin
+RUN chmod +x /usr/lib/cgi-bin/*.rb
+RUN chown -R www-data:www-data /usr/lib/cgi-bin
 
-RUN chown -R www-data:www-data /var/www/html
-RUN chown -R www-data:www-data /var/www/html/cgi
+COPY --from=builder /app/src /var/www/html/src
+COPY --from=builder /app/data0421.xml /var/www/html/data0421.xml
 
 # Apacheをフォアグラウンドで起動
 CMD ["apache2ctl", "-D", "FOREGROUND"]
