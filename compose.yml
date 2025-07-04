@@ -1,11 +1,11 @@
 services:
-  server:
+  web:
     build: .
     ports:
       - "8031:80"
     volumes:
-      - .:/app
-    working_dir: /app
+      - ./www:/var/www/html
+      - ./src/cgi:/usr/lib/cgi-bin
     environment:
       - TZ=Asia/Tokyo
-    command: ruby -run -e httpd . -p 80 -b 0.0.0.0
+    restart: unless-stopped
