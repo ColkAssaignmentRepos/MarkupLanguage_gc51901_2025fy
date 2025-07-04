@@ -2,10 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "8031:80"
-    volumes:
-      - ./www:/var/www/html
-      - ./src/cgi:/usr/lib/cgi-bin
+      - "8080:80"
     environment:
       - TZ=Asia/Tokyo
     restart: unless-stopped
