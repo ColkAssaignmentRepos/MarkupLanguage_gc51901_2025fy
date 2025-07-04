@@ -1,0 +1,15 @@
+# Ignore generated content
+www/
+
+# Ignore version control and IDE files
+.git/
+.gitignore
+.idea/
+
+# Ignore Docker-related files that are not part of the build context
+compose.yml
+Dockerfile
+
+# Ignore temporary or log files
+*.log
+*.tmp
