@@ -44,11 +44,6 @@ COPY --from=builder /app/www /var/www/html
 
 COPY --from=builder /app/src/cgi /var/www/html/cgi
 RUN chmod +x /var/www/html/cgi/*.rb
-RUN chown -R www-data:www-data /var/www/html/cgi
-
-COPY --from=builder /app/src /var/www/html/src
-COPY --from=builder /app/data0421.xml /var/www/html/data0421.xml
-RUN chmod +x /var/www/html/cgi/*.rb
 
 RUN chown -R www-data:www-data /var/www/html
 RUN chown -R www-data:www-data /var/www/html/cgi
