@@ -57,3 +57,6 @@ build-iPhoneSimulator/
 
 # data files
 data*.xml
+
+# Built Code
+./www/
