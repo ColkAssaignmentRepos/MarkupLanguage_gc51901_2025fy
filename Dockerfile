@@ -1,23 +1,26 @@
-ARG RUBY_VERSION=3.1.4
+FROM ubuntu:22.04
 
-FROM ruby:$RUBY_VERSION
-
-# Set environment variables
 ENV TZ=Asia/Tokyo
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Update and install dependencies
 RUN apt-get update && apt-get install -y \
+    apache2 \
+    ruby \
+    ruby-dev \
     libxml2-dev \
     libxslt1-dev \
     libxml2-utils \
     xsltproc \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
-WORKDIR /app
+RUN a2enmod cgi rewrite
 
-# Install webrick gem
-RUN gem install webrick
+COPY apache/httpd.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy files
-COPY . .
+COPY src/cgi /usr/lib/cgi-bin
+RUN chmod +x /usr/lib/cgi-bin/*.rb
+
+COPY www /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
