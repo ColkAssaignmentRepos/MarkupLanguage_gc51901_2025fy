@@ -98,7 +98,6 @@
                                 <xsl:for-each select="$all_books">
                                     <xsl:if test="position() >= $start_index and position() &lt;= $end_index">
                                         <tr>
-
                                             <td>
                                                 <a href="{concat('detail_', normalize-space(isbn), '.html')}">
                                                     <xsl:value-of select="title"/>
@@ -134,12 +133,6 @@
                             <xsl:with-param name="page" select="$page"/>
                             <xsl:with-param name="total_pages" select="$total_pages"/>
                         </xsl:call-template>
-
-                        <!-- Price distribution chart -->
-                        <div style="text-align: center; margin: 30px 0; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                            <h2 style="margin: 0 0 20px 0; color: #333;">📊 価格分布</h2>
-                            <xsl:call-template name="price-chart"/>
-                        </div>
                     </div>
                 </div>
             </body>
