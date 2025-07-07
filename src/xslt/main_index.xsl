@@ -7,20 +7,24 @@
         <html lang="ja">
             <head>
                 <meta charset="UTF-8"/>
-                <title>📚書籍データベース</title>
+                <title>書籍検索システム</title>
                 <link rel="stylesheet" href="/css/common.css"/>
                 <link rel="stylesheet" href="/css/index.css"/>
             </head>
             <body>
                 <div class="container">
                     <div class="header">
-                        <h1>>📚書籍データベース</h1>
-                        <p>様々な条件で、データベース上の書籍を検索できます</p>
+                        <h1>📚 書籍アーカイブ</h1>
+                        <p>書籍・著者検索システム</p>
                     </div>
 
                     <div class="content">
                         <div class="search-section">
                             <h2>🔍 書籍検索</h2>
+                            <!--
+                            入力された各条件は AND として扱われる。
+                            （例: タイトル「夏」と著者「漱石」で検索すると、両方を満たす書籍のみが対象）
+                            -->
                             <form method="GET" action="/cgi-bin/search.rb" class="search-form">
                                 <div class="form-group">
                                     <label for="title">タイトル</label>
@@ -34,11 +38,19 @@
                                     <label for="publisher">出版社</label>
                                     <input type="text" id="publisher" name="publisher" placeholder="出版社名を入力..."/>
                                 </div>
-                                <button type="submit" class="search-button">🔍 検索</button>
+                                <button type="submit" class="search-button">🔍 検索実行</button>
                             </form>
+                            <p class="search-note">
+                                ※複数の条件を入力した場合、AND検索（すべての条件を満たすもの）となります。
+                            </p>
                         </div>
 
                         <div class="navigation">
+                            <!--
+                            書籍一覧ページへ遷移する。
+                            ここではフィルタリング条件を指定していないため、常に全件表示となる。
+                            詳細な絞り込みロジックは books.xsl を参照のこと。
+                            -->
                             <a href="books/" class="nav-card">
                                 <h3>📖 書籍一覧</h3>
                                 <p>全ての書籍を閲覧<br/>ページネーション対応
@@ -53,6 +65,12 @@
 
                         <div class="stats">
                             <xsl:variable name="total_books" select="count(//item)"/>
+                            <!--
+                            generate-id() を用いることで、重複しない一意な ID を得られる。
+                            要するに、ハッシュ関数のようにとらえられる。
+                            それを用いて、ここでは、ID が一致しないもの、
+                            つまり、著者名がユニークになるようにしている。
+                            -->
                             <xsl:variable name="unique_authors"
                                           select="//item/creator[generate-id(.) = generate-id(key('authors-by-name', .)[1])]"/>
                             <xsl:variable name="total_authors" select="count($unique_authors)"/>
