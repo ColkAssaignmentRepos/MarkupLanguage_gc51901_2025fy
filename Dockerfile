@@ -1,6 +1,5 @@
 FROM ubuntu:22.04
 
-ENV TZ=Asia/Tokyo
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -28,7 +27,10 @@ COPY data0421.xml ./data0421.xml
 
 RUN chmod +x ./src/script/generate_author_hashes.sh ./src/script/generate_author_pages.sh
 
-RUN make
+ARG BASE_URL
+ARG CGI_BASE_URL
+
+RUN make all BASE_URL=${BASE_URL} CGI_BASE_URL=${CGI_BASE_URL}
 
 RUN cp -r ./www/. /var/www/html/
 RUN chmod -R 755 /var/www/html

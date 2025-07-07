@@ -1,0 +1,40 @@
+/* author_detail.css */
+.author-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.author-name {
+    font-size: 2.8em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.author-meta {
+    font-size: 1.1em;
+    color: #7f8c8d;
+}
+
+.works-list {
+    list-style: none;
+    padding: 0;
+}
+
+.works-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+}
+
+.works-list li:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.works-list a {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #34495e;
+}
