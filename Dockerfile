@@ -26,16 +26,16 @@ COPY src ./src
 COPY Makefile ./Makefile
 COPY data0421.xml ./data0421.xml
 
-RUN chmod +x /app/src/generate_author_hashes.sh /app/src/generate_author_pages.sh
+RUN chmod +x ./src/script/generate_author_hashes.sh ./src/script/generate_author_pages.sh
 
 RUN make
 
-RUN cp -r /app/www/. /var/www/html/
+RUN cp -r ./www/. /var/www/html/
 RUN chmod -R 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 RUN mkdir -p /usr/lib/cgi-bin
-RUN cp -r /app/src/cgi/. /usr/lib/cgi-bin/
+RUN cp -r ./src/cgi/. /usr/lib/cgi-bin/
 RUN chmod +x /usr/lib/cgi-bin/*.rb
 RUN chown -R www-data:www-data /usr/lib/cgi-bin
 
