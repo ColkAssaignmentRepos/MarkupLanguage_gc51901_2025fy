@@ -1,9 +1,13 @@
 ---
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        BASE_URL: "http://localhost:8080/"
+        CGI_BASE_URL: "http://localhost:8080/cgi-bin/"
     ports:
       - "8080:80"
-    environment:
-      - TZ=Asia/Tokyo
+    volumes:
+      - .:/app
     restart: unless-stopped

@@ -59,4 +59,4 @@ build-iPhoneSimulator/
 data*.xml
 
 # Built Code
-./www/
+www/
