@@ -25,38 +25,12 @@
             </div>
 
             <div class="content">
-                <div class="search-section">
-                    <h2>🔍 書籍検索</h2>
-                    <!--
-                    入力された各条件は AND として扱われる。
-                    （例: タイトル「夏」と著者「漱石」で検索すると、両方を満たす書籍のみが対象）
-                    -->
-                    <form method="GET" action="{concat($cgi_base_url, 'search.rb')}" class="search-form">
-                        <div class="form-group">
-                            <label for="title">タイトル</label>
-                            <input type="text" id="title" name="title" placeholder="書籍のタイトルを入力..."/>
-                        </div>
-                        <div class="form-group">
-                            <label for="author">著者</label>
-                            <input type="text" id="author" name="author" placeholder="著者名を入力..."/>
-                        </div>
-                        <div class="form-group">
-                            <label for="publisher">出版社</label>
-                            <input type="text" id="publisher" name="publisher" placeholder="出版社名を入力..."/>
-                        </div>
-                        <button type="submit" class="search-button">🔍 検索実行</button>
-                    </form>
-                    <p class="search-note">
-                        ※複数の条件を入力した場合、AND検索（すべての条件を満たすもの）となります。
-                    </p>
-                </div>
-
                 <div class="navigation">
-                    <!--
-                    書籍一覧ページへ遷移する。
-                    ここではフィルタリング条件を指定していないため、常に全件表示となる。
-                    詳細な絞り込みロジックは books.xsl を参照のこと。
-                    -->
+                    <a href="{concat($cgi_base_url, 'recommend.rb')}" class="nav-card recommend-card">
+                        <h3>🌟 おすすめの本</h3>
+                        <p>ランダムに選ばれた<br/>書籍をチェック
+                        </p>
+                    </a>
                     <a href="{concat($base_url, 'books/')}" class="nav-card">
                         <h3>📖 書籍一覧</h3>
                         <p>全ての書籍を閲覧<br/>ページネーション対応
